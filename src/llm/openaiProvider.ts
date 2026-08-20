@@ -1,17 +1,30 @@
+import fs from 'node:fs';
+import https from 'node:https';
 import OpenAI from 'openai';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 import { z } from 'zod';
 import type { LLMProvider, EvaluationInput, ConsolidationInput } from './provider.js';
 import { CandidateEvaluationSchema, type CandidateEvaluation } from '../schemas/candidate.js';
 import { ConsolidatedReportSchema, type ConsolidatedReport } from '../schemas/report.js';
 import { toErrorMessage } from '../utils/text.js';
+import type { LLMProviderOptions } from './factory.js';
 
 export class OpenAIProvider implements LLMProvider {
   private client: OpenAI;
   private model: string;
 
-  constructor(apiKey: string, model: string, baseURL?: string) {
-    this.client = new OpenAI({ apiKey, baseURL });
+  constructor(options: LLMProviderOptions) {
+    const { apiKey, model, baseURL, caCert, httpsProxy } = options;
     this.model = model;
+
+    const ca = caCert ? readCert(caCert) : undefined;
+    const httpAgent = buildAgent(ca, httpsProxy);
+
+    this.client = new OpenAI({
+      apiKey,
+      baseURL,
+      httpAgent,
+    });
   }
 
   async evaluateCandidate(input: EvaluationInput): Promise<CandidateEvaluation> {
@@ -60,6 +73,24 @@ export class OpenAIProvider implements LLMProvider {
     }
 
     return parseAndValidate(ConsolidatedReportSchema, content);
+  }
+}
+
+function buildAgent(ca: Buffer | string | undefined, proxy?: string): https.Agent | HttpsProxyAgent<string> | undefined {
+  if (proxy) {
+    return new HttpsProxyAgent(proxy, ca ? { ca } : undefined);
+  }
+  if (ca) {
+    return new https.Agent({ ca });
+  }
+  return undefined;
+}
+
+function readCert(path: string): Buffer {
+  try {
+    return fs.readFileSync(path);
+  } catch (error) {
+    throw new Error(`Failed to read CA certificate from ${path}: ${toErrorMessage(error)}`);
   }
 }
 

@@ -34,6 +34,8 @@ export const config = {
     apiKey: getEnv('LLM_API_KEY', ''),
     model: getEnv('LLM_MODEL', 'gpt-4o-mini'),
     baseURL: process.env.LLM_BASE_URL,
+    caCert: process.env.LLM_CA_CERT,
+    httpsProxy: process.env.LLM_HTTPS_PROXY,
     temperature: getNumberEnv('LLM_TEMPERATURE', 0.2),
     maxTokens: getNumberEnv('LLM_MAX_TOKENS', 4000),
     maxRetries: getNumberEnv('LLM_MAX_RETRIES', 2),

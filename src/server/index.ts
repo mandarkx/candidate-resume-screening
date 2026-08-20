@@ -12,6 +12,12 @@ import { config } from './config.js';
 
 dotenv.config();
 
+// Propagate the configured CA cert to Node's global TLS trust store so that
+// other outbound connections (e.g. global fetch, node-fetch, https) also trust it.
+if (config.llm.caCert && !process.env.NODE_EXTRA_CA_CERTS) {
+  process.env.NODE_EXTRA_CA_CERTS = config.llm.caCert;
+}
+
 const currentFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(currentFile), '..', '..');
 

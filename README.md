@@ -85,6 +85,17 @@ Edit `prompts/candidate-evaluation.md` (or any template file). The application l
 
 Set `LLM_PROVIDER`, `LLM_API_KEY`, `LLM_MODEL`, `LLM_BASE_URL`, `LLM_TEMPERATURE`, and `LLM_MAX_TOKENS` in `.env`. The LLM provider is abstracted; adding a new provider means implementing the `LLMProvider` interface in `src/llm/`.
 
+### Running on DoD / enterprise networks
+
+If your network requires a custom CA certificate (e.g. DoD PKI) or an HTTPS proxy, add these to `.env`:
+
+```env
+LLM_CA_CERT=C:\path\to\DoD_Root_CA.pem
+LLM_HTTPS_PROXY=https://proxy.defense.mil:8080
+```
+
+`LLM_CA_CERT` is applied directly to the OpenAI provider's HTTP agent and is also exported as `NODE_EXTRA_CA_CERTS` for other outbound connections. `LLM_HTTPS_PROXY` is used with `https-proxy-agent` to tunnel the OpenAI API calls.
+
 ## Generating Reports
 
 Reports are written to `output/reports/` and are downloadable from the web UI or the `/api/evaluations/:id/report` endpoint.

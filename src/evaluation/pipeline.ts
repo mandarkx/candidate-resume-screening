@@ -50,7 +50,13 @@ export async function createRun(options: StartPipelineOptions): Promise<Evaluati
 
 export async function processPipeline(runId: string, options: StartPipelineOptions): Promise<EvaluationRun> {
   const storage = new FilesystemStorage(path.join(config.uploads.outputDir, 'runs'));
-  const provider = createLLMProvider(config.llm.provider, config.llm.apiKey, config.llm.model, config.llm.baseURL);
+  const provider = createLLMProvider(config.llm.provider, {
+    apiKey: config.llm.apiKey,
+    model: config.llm.model,
+    baseURL: config.llm.baseURL,
+    caCert: config.llm.caCert,
+    httpsProxy: config.llm.httpsProxy,
+  });
 
   const run = await storage.get(runId);
   if (!run) {

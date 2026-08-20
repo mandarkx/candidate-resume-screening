@@ -4,15 +4,21 @@ import type { LLMProvider } from './provider.js';
 
 export type ProviderType = 'openai' | 'mock';
 
+export interface LLMProviderOptions {
+  apiKey: string;
+  model: string;
+  baseURL?: string;
+  caCert?: string;
+  httpsProxy?: string;
+}
+
 export function createLLMProvider(
   provider: string,
-  apiKey: string,
-  model: string,
-  baseURL?: string
+  options: LLMProviderOptions
 ): LLMProvider {
   switch (provider.toLowerCase()) {
     case 'openai':
-      return new OpenAIProvider(apiKey, model, baseURL);
+      return new OpenAIProvider(options);
     case 'mock':
       return new MockProvider();
     default:
