@@ -1,13 +1,33 @@
+# Dependencies
 node_modules/
+package-lock.json
+
+# Build outputs
 dist/
+*.tsbuildinfo
+*.map
+.cache/
+.eslintcache
+
+# Runtime data
 output/
 uploads/
 .env
 .env.local
 .env.*.local
+
+# Logs
 *.log
+
+# OS / editor
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+
+# Test / coverage
 coverage/
+
+# Archives
 *.tgz
 *.zip
