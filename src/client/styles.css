@@ -1,0 +1,232 @@
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --border: #e2e8f0;
+  --text: #1e293b;
+  --muted: #64748b;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+  --success: #16a34a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.app-header p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.app-main {
+  display: grid;
+  gap: 24px;
+}
+
+.panel,
+.results-panel,
+.status-bar {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.panel h2 {
+  font-size: 1.1rem;
+  margin: 24px 0 12px;
+}
+
+.panel h2:first-child {
+  margin-top: 0;
+}
+
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 32px;
+  text-align: center;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--primary);
+  background: #eff6ff;
+}
+
+.upload-zone input[type="file"] {
+  display: none;
+}
+
+.upload-label {
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.upload-hint {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.file-label,
+.file-list {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+.file-list {
+  padding-left: 20px;
+}
+
+.field-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.field-label select,
+.field-label input {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.primary-button {
+  margin-top: 24px;
+  width: 100%;
+  padding: 14px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.primary-button:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.error-box {
+  margin-top: 16px;
+  padding: 12px;
+  background: #fef2f2;
+  color: var(--danger);
+  border-radius: 8px;
+}
+
+.status-bar p {
+  margin: 4px 0;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 5px;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.warnings {
+  color: var(--warning);
+  font-size: 0.9rem;
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.ranking-table th,
+.ranking-table td {
+  border: 1px solid var(--border);
+  padding: 8px;
+  text-align: left;
+}
+
+.ranking-table th {
+  background: #f1f5f9;
+}
+
+.candidate-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.candidate-card h4 {
+  margin: 0 0 8px;
+}
+
+.download-bar {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.download-bar button {
+  flex: 1;
+  padding: 12px;
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.download-bar button:hover {
+  background: #e2e8f0;
+}
+
+.disclaimer {
+  margin-top: 20px;
+  padding: 12px;
+  background: #fffbeb;
+  border-left: 4px solid var(--warning);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}

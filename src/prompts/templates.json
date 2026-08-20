@@ -1,0 +1,20 @@
+[
+  {
+    "id": "candidate-evaluation",
+    "name": "General Candidate Evaluation",
+    "description": "Default evaluation template for general candidate screening.",
+    "filePath": "prompts/candidate-evaluation.md"
+  },
+  {
+    "id": "technical-engineer",
+    "name": "Technical Engineer",
+    "description": "Evaluation template optimized for technical engineering roles.",
+    "filePath": "prompts/technical-engineer.md"
+  },
+  {
+    "id": "cloud-administrator",
+    "name": "Cloud Administrator",
+    "description": "Evaluation template optimized for cloud and systems administration roles.",
+    "filePath": "prompts/cloud-administrator.md"
+  }
+]
