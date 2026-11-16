@@ -11,6 +11,15 @@ A production-quality, LLM-powered resume screening application.
 - Export reports as Markdown and professional PDF.
 - Clean REST API and a modern web interface.
 
+## Quick Start (Windows, no development experience needed)
+
+1. Install Node.js (LTS) from https://nodejs.org if you don't have it.
+2. Double-click **`start-resume-screener.bat`**.
+3. On first run, a `.env` file opens in Notepad — paste your API key after `LLM_API_KEY=`, set `LLM_PROVIDER` to `openai` or `gemini`, save, and press a key in the console window.
+4. The app installs dependencies, builds, starts, and opens in your browser automatically. On later runs it just starts.
+
+Keep the console window open while using the app; close it to stop.
+
 ## Installation
 
 ```bash
@@ -25,6 +34,14 @@ Copy `.env.example` to `.env` and set at minimum:
 LLM_PROVIDER=openai
 LLM_API_KEY=sk-...
 LLM_MODEL=gpt-4o-mini
+```
+
+For a Google Gemini (AI Studio) key:
+
+```env
+LLM_PROVIDER=gemini
+LLM_API_KEY=<your-gemini-api-key>
+LLM_MODEL=gemini-2.5-flash
 ```
 
 See `.env.example` for all options.

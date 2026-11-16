@@ -1,4 +1,5 @@
 import express from 'express';
+import { exec } from 'node:child_process';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -64,5 +65,19 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 app.listen(config.port, () => {
-  console.log(`Resume screener server running on http://localhost:${config.port}`);
+  const url = `http://localhost:${config.port}`;
+  console.log(`Resume screener server running on ${url}`);
+  if (config.nodeEnv === 'production' && process.env.OPEN_BROWSER !== '0') {
+    openBrowser(url);
+  }
 });
+
+function openBrowser(url: string): void {
+  const command =
+    process.platform === 'win32'
+      ? `start "" "${url}"`
+      : process.platform === 'darwin'
+        ? `open "${url}"`
+        : `xdg-open "${url}"`;
+  exec(command, () => {});
+}

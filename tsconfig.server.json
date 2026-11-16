@@ -5,7 +5,8 @@
     "rootDir": "src",
     "noEmit": false,
     "allowImportingTsExtensions": false,
-    "moduleResolution": "node"
+    "module": "NodeNext",
+    "moduleResolution": "nodenext"
   },
   "include": ["src/server/**/*", "src/extraction/**/*", "src/prompts/**/*", "src/llm/**/*", "src/schemas/**/*", "src/evaluation/**/*", "src/reports/**/*", "src/storage/**/*", "src/utils/**/*", "src/shared/**/*"],
   "exclude": ["src/client/**/*"]
